@@ -12,8 +12,8 @@ public class Teacher
     public int? Age {get; set;} 
     public long Salary {get; set;} 
     public Gender? Gender {get; set;}
-    public DateTime FirstWork {get; set;}
-    public DateTime LastTakeSalary {get; set;} 
+    public DateOnly FirstWork {get; set;}
+    public DateOnly LastTakeSalary {get; set;} 
     public long LastTakeMoney {get; set;}
     public bool Debt {get; set;} = true;
     public int? Experience {get; set;} 

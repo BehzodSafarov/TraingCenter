@@ -96,6 +96,7 @@ public class TestService : ITestService
         {
             testAnswer.AnswerStatus = false;
         }
+        testAnswer.RightOption = question.RightOption;
         
         return testAnswer;
     }

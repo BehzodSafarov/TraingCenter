@@ -48,9 +48,17 @@
         if(page < 0 || limit < 0)
         return BadRequest("Page or Limit is minus");
 
-        return Ok(await _teacherService.GetAllAsync(page, limit));
+        return Ok(await _teacherService.GetAllWithPaginationAsync(page, limit));
       }
       
+      [HttpGet("GetAll")]
+      public async Task<IActionResult> GetAll()
+      {
+        var teachers = await _teacherService.GetAllAsync();
+
+        return Ok(teachers.Data);
+      }
+
       [HttpGet("GetOne")]
       public async Task<IActionResult> GetOnTeacher(string name, string email)
       {

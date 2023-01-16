@@ -11,7 +11,8 @@ public interface IQuestionService
     ValueTask<Result> Remove(int id);
     ValueTask<Result<Question>> Update(int id, string title, Level level, string AOption, string BOption,
                                                          string COption, string DOption, string RightOption);
-    ValueTask<Result<List<Question>>> GetAll(int page, int limit);
+    ValueTask<Result<List<Question>>> GetAllWithPaginaton(int page, int limit);
+    ValueTask<Result<List<Question>>> GetAll();
     ValueTask<Result<Question>> GetById(int id);
     ValueTask<Result> RemoveAll();
 }

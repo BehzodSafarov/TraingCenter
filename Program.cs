@@ -6,9 +6,20 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "Myproject",
+                      policy  =>
+                      {
+                          policy.AllowAnyOrigin()
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                      });
+});
 builder.Services.AddDbContext<AppDbContext>(options => 
 {
-    options.UseSqlite("Data Source = Data.db;");
+    // options.UseSqlite("Data Source = Data.db;");
+    options.UseInMemoryDatabase("data");
     // options.UseLazyLoadingProxies();?
 });
 
@@ -27,6 +38,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
+app.UseCors("Myproject");
 
 app.UseAuthentication();
 app.UseAuthorization();

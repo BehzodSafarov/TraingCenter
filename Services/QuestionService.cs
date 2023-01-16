@@ -38,7 +38,7 @@ public partial class QuestionService : IQuestionService
     }
 
     
-    public async ValueTask<Result<List<Question>>> GetAll(int page, int limit)
+    public async ValueTask<Result<List<Question>>> GetAllWithPaginaton(int page, int limit)
     {
         try
         {
@@ -146,5 +146,23 @@ public partial class QuestionService : IQuestionService
         return new("Question not Found");
 
         return new(true) {Data = ToModelQuestion(question)};
+    }
+
+    public async ValueTask<Result<List<Question>>> GetAll()
+    {
+       try
+       {
+         var existQuestions = _unitOfWork.Questions.GetAll();
+
+         if(existQuestions is null)
+         return new("Questions is not exist");
+
+         return new(true) {Data = existQuestions.Select(x => ToModelQuestion(x)).ToList()};
+       }
+       catch (System.Exception e)
+       {
+        _logger.LogInformation("Questions didn't taked");
+        throw new Exception(e.Message);
+       }
     }
 }

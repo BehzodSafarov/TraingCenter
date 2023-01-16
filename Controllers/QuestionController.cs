@@ -37,16 +37,23 @@ public class QuestionController : ControllerBase
         return Ok(question);
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet("GetAllWithPagination")]
     public async Task<IActionResult> GetAllQuestions(int page, int limit)
     {
 
         if(page <= 0 || limit <= 0)
         return BadRequest("Page or limit can't be Minus or Thero");
 
-        return Ok(await _questionService.GetAll(page, limit));
+        return Ok(await _questionService.GetAllWithPaginaton(page, limit));
 
     }
+    
+    [HttpGet("GetAll")]
+    public async Task<IActionResult> GetAll()
+    {
+        return Ok(await _questionService.GetAll());
+    }
+
     [HttpDelete("Remove")]
     public async Task<IActionResult> Remove(int id)
     {

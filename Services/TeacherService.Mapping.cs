@@ -15,7 +15,7 @@ public partial class TeacherService
        Salary = teacher.Salary,
        Gender = teacher.Gender,
        FirstWork = teacher.FirstWork,
-       LastTakeMoney = teacher.LastTakeMoney,
+       LastTakeMoney =  teacher.LastTakeMoney,
        LastTakeSalary = teacher.LastTakeSalary,
        Debt = teacher.Debt,
        Experience = teacher.Experience,

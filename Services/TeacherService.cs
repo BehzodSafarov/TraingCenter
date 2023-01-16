@@ -42,9 +42,25 @@ public partial  class TeacherService : ITeacherService
         }
     }
 
-   
+    public async ValueTask<Result<List<Teacher>>> GetAllAsync()
+    {
+        try
+        {
+            var teachers = _unitOfWork.Teachers.GetAll();
 
-    public async ValueTask<Result<List<Teacher>>> GetAllAsync(int page=1, int limit=100)
+            if(teachers is null)
+            return new("Teachers is not exist");
+
+            return new(true) {Data = teachers.Select(x => ToModel(x)).ToList()};
+        }
+        catch (System.Exception e)
+        {
+            
+            throw new Exception(e.Message);
+        }
+    }
+
+    public async ValueTask<Result<List<Teacher>>> GetAllWithPaginationAsync(int page=1, int limit=100)
     {
         try
         {
